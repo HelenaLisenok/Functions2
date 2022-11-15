@@ -205,17 +205,20 @@ console.log(getSumkv([1, 2, 3, 4, 5]));
 };
 
 function checkResult11() {
-	function func(obj) {
-	for (let elem of obj) {
-		if (typeof elem == 'object') {
-			func(elem);
+	function printObject(obj)
+	
+	{
+		let keys = Object.keys(obj);
+		for (let i = 0; i <= keys.length; i++) {
+			if (typeof obj[keys[i]] == 'object') {
+			printObject(obj[keys[i]]);
 		} else {
-			console.log(elem);
+			console.log(obj[keys[i]]);
 		}
 	}
 }
 
-func({a: 1, b: {c: 2, d: 3, e: 4}, f: {g: 5, j: 6, k: {l: 7, m: {n: 8, o: 9}}}});
+printObject({a: 1, b: {c: 2, d: 3, e: 4}, f: {g: 5, j: 6, k: {l: 7, m: {n: 8, o: 9}}}});
 
 
 }
