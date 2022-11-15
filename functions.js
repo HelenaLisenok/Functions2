@@ -77,8 +77,10 @@ function checkResult4() {
   return function(num1) {
 	  return num1 + num;
 	  }
-})(1)(2);
+	})(1)(2);
+	
 }
+console.log(checkResult4());
 		
 function checkResult5() {
 
@@ -112,7 +114,7 @@ console.log(result);
 }
 
 function checkResult7() {
-	let arr = [1, 2, 3, 4, 5];
+	let arr = [1, 2, 6, 4, 5];
 function func(arr1) {
 	console.log(arr1.shift(), arr1);
 	
@@ -122,6 +124,98 @@ function func(arr1) {
 }
 
 func(arr);
+}
+
+function checkResult8() {
+
+function cube(num) {
+	return num * num * num;
+}
+let result = each([1, 2, 3, 4, 5], cube);
+	console.log(result);
+	
+	function each(arr, callback) {
+	let result = [];
+	
+	for (let elem of arr) {
+		result.push( callback(elem) ); // вызываем функцию-коллбэк
+	}
+	
+	return result;
+}
+
+}
+
+function checkResult9() {
+	let obj = {
+  arr: [2, 4, 5, [1, 2, 4], [3, 2, 1, [true, false]]],
+  innerObj: {
+    name: 'Harry',
+    secondName: 'Potter',
+    faculty: 'Griffindor',
+    enemis: ['Maffoy', 'Dudly']
+  },
+  age: 15,
+  weigh: 50
+};
+
+function copyObject(obj) {
+  let newObj = typeof obj === 'object' && !Array.isArray(obj) ? {} : []; // определяем тип объекта
+  if (Object.keys(obj).length) { // есть ли у него ключи, не пустой ли он
+    let keys = Object.keys(obj); // длина массива для цикла
+    for (let i = 0; i < keys.length; i++) {
+      // обрабатываем объект
+      if (typeof obj[keys[i]] === 'object' && !Array.isArray(obj[keys[i]])) {
+        newObj[keys[i]] = copyObject(obj[keys[i]]);
+        // обрабатываем массив
+      } else if (Array.isArray(obj[keys[i]])) {
+        newObj[keys[i]] = [];
+        for (let j = 0; j < obj[keys[i]].length; j++) {
+          if (typeof obj[keys[i]][j] === 'object') {
+            newObj[keys[i]][j] = copyObject(obj[keys[i]][j]);
+          } else {
+            newObj[keys[i]][j] = obj[keys[i]][j];
+          }
+        }
+      } // обрабатываем примитивы
+      else {
+        newObj[keys[i]] = obj[keys[i]];
+      }
+    }
+  }
+  return newObj;
+}
+
+console.log(obj);
+console.log(copyObject(obj));
+}
+
+function checkResult10() {
+	function getSumkv(arr) {
+	let sumkv = Math.pow(arr.shift(),2);
+	
+	if (arr.length !== 0) {
+		sumkv += getSumkv(arr);
+	}
+	
+	return sumkv;
+}
+
+console.log(getSumkv([1, 2, 3, 4, 5]));
+};
+
+function checkResult11() {
+	function func(obj) {
+	for (let elem of obj) {
+		if (typeof elem == 'object') {
+			func(elem);
+		} else {
+			console.log(elem);
+		}
+	}
+}
+
+func({a: 1, b: {c: 2, d: 3, e: 4}, f: {g: 5, j: 6, k: {l: 7, m: {n: 8, o: 9}}}});
 
 
 }
